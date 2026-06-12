@@ -10,6 +10,14 @@ export async function POST(req: Request) {
       prompt,
     });
 
+    result.usage.then((usage) => {
+      console.log({
+        inputTokens: usage.inputTokenDetails,
+        outputTokens: usage.outputTokenDetails,
+        totalTokens: usage.totalTokens
+      })
+    })
+
     return result.toUIMessageStreamResponse();
   } catch (err) {
     const message = err instanceof Error ? err.message : "Something went wrong";
